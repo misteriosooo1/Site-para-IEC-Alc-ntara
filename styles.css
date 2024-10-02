@@ -1,0 +1,230 @@
+/* Estilos globais */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Estilos do cabeçalho */
+header {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.icone {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Navegação */
+nav {
+    display: flex;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #e21d4b;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Adiciona transição suave */
+}
+
+/* Efeito hover nos links de navegação */
+nav ul li a:hover {
+    color: #000000; /* Cor ao passar o mouse */
+}
+
+/* Estilos da hero section */
+.hero {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    color: #000000;
+    text-align: center;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('boasvindasieca.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-box {
+    background-color: white;
+    width: 800px;
+    height: 300px;
+    border-radius: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.hero-content h2, .hero-content p {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h2 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 24px;
+    margin-top: 0;
+    color: #666;
+}
+
+.arrow-down {
+    position: absolute;
+    bottom: -40px;
+    left: 48%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #e21d4b;
+    animation: animar-seta 2s infinite;
+    z-index: 1000;
+}
+
+.arrow-down img {
+    width: 130px;
+    height: 130px;
+    animation: animar-seta 2s infinite;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes animar-seta {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Call to action button */
+.cta {
+    background-color: #ffffff;
+    font-weight: bold;
+    color: #e21d4b;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Seções gerais */
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #e21d4b;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Redes sociais */
+.social-media {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.social-media a {
+    color: #e21d4b;
+    margin: 0 10px;
+    font-size: 24px;
+    transition: color 0.3s ease; /* Adiciona transição suave */
+}
+
+.social-media a:hover {
+    color: #ffffff;
+}
+
+/* Estilos do rodapé */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    clear: both;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #ccc;
+}
