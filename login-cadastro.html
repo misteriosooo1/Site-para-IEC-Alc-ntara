@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro - IEC Alcântara</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="logoieca.png">
+    <link rel="icon" href="logoieca.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="login-cadastro.html">
+                <img src="logoieca.png" alt="Ícone da Igreja" class="icone">
+            </a>
+            <a href="login-cadastro.html" style="text-decoration: none; color: inherit;">
+                <h1>IEC Alcântara - Login e Cadastro</h1>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section id="login-cadastro">
+            <div id="form-container">
+                <!-- Formulário de Login -->
+                <div class="form-login">
+                    <h3>Login</h3>
+                    <form id="form-login">
+                        <label for="email-login">Email:</label>
+                        <input type="email" id="email-login" name="email" required>
+
+                        <label for="senha-login">Senha:</label>
+                        <input type="password" id="senha-login" name="senha" required>
+
+                        <button type="submit">Entrar</button>
+                        <p>Não tem uma conta? <a href="#" id="show-cadastro">Cadastre-se</a></p>
+                    </form>
+                </div>
+
+                <!-- Formulário de Cadastro -->
+                <div class="form-cadastro" id="form-cadastro-container" style="display:none;">
+                    <h3>Cadastrar Nova Conta</h3>
+                    <form id="form-cadastro">
+                        <label for="email-cadastro">Email:</label>
+                        <input type="email" id="email-cadastro" name="email" required>
+
+                        <label for="senha-cadastro">Senha:</label>
+                        <input type="password" id="senha-cadastro" name="senha" required>
+
+                        <button type="submit">Cadastrar</button>
+                        <p>Já tem uma conta? <a href="#" id="show-login">Faça login</a></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 IEC Alcântara. Todos os direitos reservados.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAf1EfbohLx-0cTRdMSheZ3io7D8NqXo3k",
+            authDomain: "ieca-c6c22.firebaseapp.com",
+            databaseURL: "https://ieca-c6c22-default-rtdb.firebaseio.com",
+            projectId: "ieca-c6c22",
+            storageBucket: "ieca-c6c22.firebasestorage.app",
+            messagingSenderId: "360000245007",
+            appId: "1:360000245007:web:67b28c9d6352846bd6c27a"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Mostrar Formulário de Cadastro
+        document.getElementById("show-cadastro").addEventListener("click", function(e) {
+            e.preventDefault();
+            // Exibe o formulário de cadastro
+            document.getElementById("form-cadastro-container").style.display = "block";
+        });
+
+        // Mostrar Formulário de Login
+        document.getElementById("show-login").addEventListener("click", function(e) {
+            e.preventDefault();
+            // Esconde o formulário de cadastro e exibe o de login
+            document.getElementById("form-cadastro-container").style.display = "none";
+        });
+
+        // Cadastro
+        document.getElementById("form-cadastro").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const email = document.getElementById("email-cadastro").value;
+            const senha = document.getElementById("senha-cadastro").value;
+
+            createUserWithEmailAndPassword(auth, email, senha)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    alert("Cadastro realizado com sucesso!");
+                    window.location.href = "login-cadastro.html"; // Redireciona para login após cadastro
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert("Erro: " + errorMessage);
+                });
+        });
+
+        // Login
+        document.getElementById("form-login").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const email = document.getElementById("email-login").value;
+            const senha = document.getElementById("senha-login").value;
+
+            signInWithEmailAndPassword(auth, email, senha)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    alert("Login realizado com sucesso!");
+                    window.location.href = "admin.html"; // Redireciona para o painel de administração após login
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert("Erro: " + errorMessage);
+                });
+        });
+    </script>
+</body>
+</html>

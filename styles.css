@@ -61,12 +61,11 @@ nav ul li a {
     text-decoration: none;
     color: #e21d4b;
     font-weight: bold;
-    transition: color 0.3s ease; /* Adiciona transição suave */
+    transition: color 0.3s ease;
 }
 
-/* Efeito hover nos links de navegação */
 nav ul li a:hover {
-    color: #000000; /* Cor ao passar o mouse */
+    color: #000000;
 }
 
 /* Estilos da hero section */
@@ -88,7 +87,7 @@ nav ul li a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('boasvindasieca.png');
+    background-image: url('boasvindasieca.png'); /* Atualize para seu arquivo local */
     background-size: cover;
     background-position: center;
     filter: blur(8px);
@@ -114,7 +113,8 @@ nav ul li a:hover {
     z-index: 1;
 }
 
-.hero-content h2, .hero-content p {
+.hero-content h2, 
+.hero-content p {
     position: relative;
     z-index: 2;
 }
@@ -138,15 +138,16 @@ nav ul li a:hover {
     font-size: 24px;
     color: #e21d4b;
     animation: animar-seta 2s infinite;
-    z-index: 1000;
+    z-index: 900;
 }
 
 .arrow-down img {
     width: 130px;
     height: 130px;
-    animation: animar-seta 2s infinite;
-    position: relative;
-    z-index: 1;
+}
+
+body {
+    padding-top: 100px; /* Ajuste de acordo com a altura do cabeçalho */
 }
 
 @keyframes animar-seta {
@@ -200,7 +201,7 @@ p {
     color: #e21d4b;
     margin: 0 10px;
     font-size: 24px;
-    transition: color 0.3s ease; /* Adiciona transição suave */
+    transition: color 0.3s ease;
 }
 
 .social-media a:hover {
@@ -228,3 +229,262 @@ footer a {
 footer a:hover {
     color: #ccc;
 }
+
+/* Estilos para a grid de eventos */
+/* Estilo dos cartões */
+.event-grid {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.event-card {
+    width: 250px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.event-info {
+    padding: 10px;
+}
+
+.event-info h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.event-date {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.event-date i {
+    color: #e21d4b;
+}
+
+/* Estilo do modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.modal-title {
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.modal-description {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+
+
+/* Estilos para o botão de voltar */
+.back-button {
+    background-color: #e21d4b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #c2183a;
+}
+
+/* Estilos da galeria */
+.gallery-title {
+    text-align: center; /* Centraliza horizontalmente */
+    margin: 20px 0; /* Adiciona margem acima e abaixo do título */
+    font-size: 36px; /* Ajuste o tamanho da fonte se necessário */
+    color: #e21d4b; /* Cor do texto (opcional) */
+}
+
+/* Estilos da seção da galeria */
+.gallery-section {
+    height: 400px; /* Defina a altura desejada */
+    display: flex; /* Ativa o modelo flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 0; /* Remove o padding existente */
+    flex-direction: column; /* Alinha o texto em coluna */
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Aumentei o espaçamento entre os quadrados */
+    padding: 20px;
+}
+
+.gallery img {
+    width: 500px; /* Aumentei a largura dos quadrados */
+    height: 400px; /* Aumentei a altura dos quadrados */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.05); /* Aumenta o tamanho ao passar o mouse */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos da tooltip */
+.image-container {
+    position: relative; /* Necessário para posicionar o tooltip */
+    display: inline-block; /* Permite que as imagens fiquem lado a lado */
+}
+
+
+/* Estilos da tooltip */
+.tooltip {
+    position: absolute;
+    background-color: rgba(226, 29, 75, 0.85);
+    color: #fff;
+    padding: 60px; /* Padding padrão, será substituído por tooltips específicas */
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+
+    /* Novas propriedades para centralização */
+    display: flex; /* Usando flexbox para centralização */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Alinha horizontalmente */
+    text-align: center; /* Centraliza o texto */
+}
+
+.image-container {
+    position: relative;
+}
+
+/* Estilos específicos para cada tooltip */
+.tooltip-culto {
+    top: -0px; /* Ajuste a posição vertical se necessário */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px; /* Ajuste a largura desejada */
+    height: 400px; /* Ajuste a altura desejada */
+    padding: 120px; /* Aumenta o padding */
+    background-color: rgba(226, 29, 75, 0.85); /* Cor de fundo */
+    color: #ffffff; /* Cor do texto */
+    font-size: 25px; /* Tamanho da fonte */
+    border-radius: 5px; /* Bordas arredondadas */
+    visibility: hidden; /* Inicia como invisível */
+    opacity: 0; /* Inicia como invisível */
+    transition: visibility 0s, opacity 0.5s linear; /* Animação de aparecer/desaparecer */
+}
+
+.tooltip-evento {
+    top: -0px; /* Ajuste a posição vertical se necessário */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px; /* Ajuste a largura desejada */
+    height: 400px; /* Ajuste a altura desejada */
+    padding: -90px; /* Aumenta o padding */
+    background-color: rgba(226, 29, 75, 0.85); /* Cor de fundo */
+    color: #ffffff; /* Cor do texto */
+    font-size: 25px; /* Tamanho da fonte */
+    border-radius: 5px; /* Bordas arredondadas */
+    visibility: hidden; /* Inicia como invisível */
+    opacity: 0; /* Inicia como invisível */
+    transition: visibility 0s, opacity 0.5s linear; /* Animação de aparecer/desaparecer */
+}
+
+.tooltip-comunidade {
+    top: -0px; /* Ajuste a posição vertical se necessário */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px; /* Ajuste a largura desejada */
+    height: 400px; /* Ajuste a altura desejada */
+    padding: 120px; /* Aumenta o padding */
+    background-color: rgba(226, 29, 75, 0.85); /* Cor de fundo */
+    color: #ffffff; /* Cor do texto */
+    font-size: 25px; /* Tamanho da fonte */
+    border-radius: 5px; /* Bordas arredondadas */
+    visibility: hidden; /* Inicia como invisível */
+    opacity: 0; /* Inicia como invisível */
+    transition: visibility 0s, opacity 0.5s linear; /* Animação de aparecer/desaparecer */
+}
+
+
+
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: -6px; /* Ajusta a seta mais próxima da borda da tooltip */
+    left: 30%; /* Centraliza a seta horizontalmente */
+    transform: translateX(-50%); /* Ajusta a seta */
+    border-width: 6px; /* Largura da seta */
+    border-style: solid;
+    border-color: transparent transparent rgba(226, 29, 75, 0.85) transparent; /* Seta invertida */
+}
+
+.image-container:hover .tooltip {
+    visibility: visible; /* Torna visível ao passar o mouse */
+    opacity: 1; /* Aumenta a opacidade para 1 */
+}
+
+
+
+

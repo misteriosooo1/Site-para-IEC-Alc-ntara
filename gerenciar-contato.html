@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Contato - IEC Alcântara</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="logoieca.png">
+    <link rel="icon" href="logoieca.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="logoieca.png" alt="Ícone da Igreja" class="icone">
+            </a>
+            <a href="admin.html" style="text-decoration: none; color: inherit;">
+                <h1>IEC Alcântara - Painel de Administração</h1>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Dashboard</a></li>
+                <li><a href="gerenciar-eventos.html">Eventos</a></li>
+                <li><a href="gerenciar-galeria.html">Galeria</a></li>
+                <li><a href="gerenciar-contato.html">Contato</a></li>
+                <li><a href="login-cadastro.html">Sair</a></li> <!-- Logout do admin -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="listar-contatos">
+            <h3>Mensagens de Contato</h3>
+            <table id="contatos-lista">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Mensagem</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- As mensagens de contato serão exibidas aqui -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="responder-mensagem">
+            <h3>Responder Mensagem</h3>
+            <form id="form-responder-mensagem">
+                <label for="resposta">Sua Resposta:</label>
+                <textarea id="resposta" name="resposta" required></textarea>
+                <button type="submit" class="btn-admin">Enviar Resposta</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 IEC Alcântara. Todos os direitos reservados.</p>
+        <div class="social-media">
+            <a href="https://www.facebook.com/iec.alcantara" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/SeuPerfil" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/iec.alcantara/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/c/IecAlc%C3%A2ntara" target="_blank" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Firebase Config
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAf1EfbohLx-0cTRdMSheZ3io7D8NqXo3k",
+            authDomain: "ieca-c6c22.firebaseapp.com",
+            databaseURL: "https://ieca-c6c22-default-rtdb.firebaseio.com",
+            projectId: "ieca-c6c22",
+            storageBucket: "ieca-c6c22.firebasestorage.app",
+            messagingSenderId: "360000245007",
+            appId: "1:360000245007:web:67b28c9d6352846bd6c27a"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Função para listar mensagens de contato
+        function listarMensagens() {
+            const contatosRef = ref(db, 'contatos');
+            onValue(contatosRef, (snapshot) => {
+                const mensagens = snapshot.val();
+                const tabela = document.getElementById("contatos-lista").getElementsByTagName("tbody")[0];
+                tabela.innerHTML = "";
+                for (let id in mensagens) {
+                    const mensagem = mensagens[id];
+                    const linha = tabela.insertRow();
+                    linha.innerHTML = `
+                        <td>${mensagem.nome}</td>
+                        <td>${mensagem.email}</td>
+                        <td>${mensagem.mensagem}</td>
+                        <td>
+                            <button onclick="responderMensagem('${id}')">Responder</button>
+                        </td>
+                    `;
+                }
+            });
+        }
+
+        // Função para responder a mensagem
+        function responderMensagem(id) {
+            const resposta = document.getElementById("resposta").value;
+            if (!resposta) {
+                alert("Por favor, escreva uma resposta.");
+                return;
+            }
+            const mensagemRef = ref(db, 'contatos/' + id);
+            set(mensagemRef, {
+                resposta: resposta
+            }).then(() => {
+                alert("Resposta enviada com sucesso!");
+                listarMensagens(); // Atualiza a lista de mensagens
+            }).catch((error) => {
+                console.error("Erro ao responder mensagem:", error);
+                alert("Ocorreu um erro ao enviar a resposta.");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            listarMensagens(); // Carrega as mensagens assim que a página é carregada
+        });
+    </script>
+</body>
+</html>

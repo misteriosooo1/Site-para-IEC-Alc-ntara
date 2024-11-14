@@ -1,0 +1,393 @@
+/* Estilos gerais para o painel */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fb;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header do painel de administração */
+header {
+    background-color: #2e3b4e;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header .logo a {
+    text-decoration: none;
+    color: white;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+/* Container principal */
+main {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Seção de botões de navegação */
+.section-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Botões de navegação */
+.navigation-button {
+    background-color: #e21d4b;
+    color: white;
+    font-size: 18px;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    width: 250px;
+    text-align: center;
+    display: block;
+    transition: background-color 0.3s;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-button:hover {
+    background-color: #d01c47;
+}
+
+/* Seção de título */
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2e3b4e;
+}
+
+/* Estilo dos botões de navegação */
+.btn-admin {
+    display: inline-block;
+    background-color: #e21d4b;
+    color: white;
+    font-size: 18px;
+    padding: 15px 30px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
+    width: 250px;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-admin:hover {
+    background-color: #c3183f;
+    transform: translateY(-2px); /* Efeito de elevação ao passar o mouse */
+}
+
+.admin-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.admin-box {
+    background-color: #f4f7fb;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.admin-box h3 {
+    font-size: 22px;
+    color: #333;
+}
+
+.admin-box p {
+    color: #777;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+/* Estilos para a página de Eventos */
+#eventos h2, #eventos h3 {
+    color: #2e3b4e;
+}
+
+#lista-eventos {
+    margin-bottom: 20px;
+}
+
+.evento-item {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.evento-item h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+#adicionar-evento-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#adicionar-evento-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#adicionar-evento-form input, #adicionar-evento-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 3px solid #ccc;
+    border-radius: 1px;
+}
+
+#adicionar-evento-form button {
+    background-color: #ff1100;
+    color: white;
+    padding: 30px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#adicionar-evento-form button:hover {
+    background-color: #849e86;
+}
+
+/* Estilos para a página de Galeria */
+#galeria h2 {
+    color: #333333;
+}
+
+#lista-galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.foto-item {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px);
+}
+
+.foto-item img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+#adicionar-foto-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#adicionar-foto-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#adicionar-foto-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#adicionar-foto-form button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para a página de Contato */
+#contato h2 {
+    color: #2e3b4e;
+}
+
+#lista-contato {
+    margin-bottom: 20px;
+}
+
+.mensagem-item {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mensagem-item h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+#mensagem-resposta-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#mensagem-resposta-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#mensagem-resposta-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#mensagem-resposta-form button:hover {
+    background-color: #45a049;
+}
+
+/* login-cadastro.css */
+
+/* Estilos gerais para a página de login e cadastro */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fb;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header da página */
+header {
+    background-color: #2e3b4e;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header .logo a {
+    text-decoration: none;
+    color: white;
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+/* Formulário de login e cadastro */
+form {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2e3
+}
+
+form input, form textarea{
+    outline: unset;
+    padding: 20px;
+    width: 300 px;
+    border: 1px solid #2e3;
+    border-radius: 20px;
+}
+
+
+
+
+.alerta {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.alerta.sucesso {
+    background-color: #28a745; /* Verde para sucesso */
+}
+
+.alerta.erro {
+    background-color: #dc3545; /* Vermelho para erro */
+}
+
+/* Estilo para o botão Adicionar Evento */
+.btn-admin {
+    background-color: #4CAF50; /* Cor de fundo verde */
+    color: white;
+    font-size: 18px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-admin:hover {
+    background-color: #45a049; /* Cor verde mais escura ao passar o mouse */
+    transform: translateY(-2px); /* Efeito de elevação */
+}
+

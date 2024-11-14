@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Eventos - IEC Alcântara</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="logoieca.png">
+    <link rel="icon" href="logoieca.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="logoieca.png" alt="Ícone da Igreja" class="icone">
+            </a>
+            <a href="admin.html" style="text-decoration: none; color: inherit;">
+                <h1>IEC Alcântara - Painel de Administração</h1>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Dashboard</a></li>
+                <li><a href="gerenciar-eventos.html">Eventos</a></li>
+                <li><a href="gerenciar-galeria.html">Galeria</a></li>
+                <li><a href="gerenciar-contato.html">Contato</a></li>
+                <li><a href="login-cadastro.html">Sair</a></li> <!-- Logout do admin -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="adicionar-evento">
+            <h3>Adicionar Novo Evento</h3>
+            <form id="form-adicionar-evento">
+                <label for="titulo">Título do Evento:</label>
+                <input type="text" id="titulo" name="titulo" required>
+                
+                <label for="data">Data do Evento:</label>
+                <input type="date" id="data" name="data" required>
+
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+
+                <button type="submit" class="btn-admin">Salvar Evento</button>
+                <button type="button" class="btn-cancelar" style="display: none;" onclick="cancelarEdicao()">Cancelar Edição</button>
+            </form>
+        </section>
+
+        <section id="listar-eventos">
+            <h3>Eventos Cadastrados</h3>
+            <table id="eventos-lista">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Os eventos serão exibidos aqui dinamicamente -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 IEC Alcântara. Todos os direitos reservados.</p>
+        <div class="social-media">
+            <a href="https://www.facebook.com/iec.alcantara" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/SeuPerfil" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/iec.alcantara/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/c/IecAlc%C3%A2ntara" target="_blank" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Defina o script como módulo -->
+    <script type="module">
+        // Firebase Config
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getDatabase, ref, set, update, remove, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAf1EfbohLx-0cTRdMSheZ3io7D8NqXo3k",
+            authDomain: "ieca-c6c22.firebaseapp.com",
+            databaseURL: "https://ieca-c6c22-default-rtdb.firebaseio.com",
+            projectId: "ieca-c6c22",
+            storageBucket: "ieca-c6c22.firebasestorage.app",
+            messagingSenderId: "360000245007",
+            appId: "1:360000245007:web:67b28c9d6352846bd6c27a"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let eventoEditando = null;
+
+        // Função para adicionar ou atualizar evento
+    function salvarEvento(titulo, data, descricao) {
+        if (eventoEditando) {
+            const eventoRef = ref(db, 'eventos/' + eventoEditando);
+            update(eventoRef, {
+                titulo: titulo,
+                data: data,
+                descricao: descricao
+            }).then(() => {
+                alert("Evento atualizado com sucesso!");
+                listarEventos();  // Chama listarEventos apenas após a atualização ser concluída
+                resetarFormulario();
+            }).catch((error) => {
+                
+            });
+        } else {
+            const newEventRef = ref(db, 'eventos/' + Date.now());
+            set(newEventRef, {
+                titulo: titulo,
+                data: data,
+                descricao: descricao
+            }).then(() => {
+                alert("Evento adicionado com sucesso!");
+                listarEventos();  // Chama listarEventos apenas após o salvamento ser concluído
+                resetarFormulario();
+            }).catch((error) => {
+                
+            });
+        }
+    }
+
+        // Função para listar eventos
+        function listarEventos() {
+            const eventosRef = ref(db, 'eventos');
+            onValue(eventosRef, (snapshot) => {
+                const eventos = snapshot.val();
+                const tabela = document.getElementById("eventos-lista").getElementsByTagName("tbody")[0];
+                tabela.innerHTML = "";
+                for (let id in eventos) {
+                    const evento = eventos[id];
+                    const linha = tabela.insertRow();
+                    linha.innerHTML = `
+                        <td>${evento.titulo}</td>
+                        <td>${evento.data}</td>
+                        <td>${evento.descricao}</td>
+                        <td>
+                            <button onclick="editarEvento('${id}', '${evento.titulo}', '${evento.data}', '${evento.descricao}')">Editar</button>
+                            <button onclick="removerEvento('${id}')">Excluir</button>
+                        </td>
+                    `;
+                }
+            });
+        }
+
+        // Função para remover evento
+        function removerEvento(id) {
+            const eventoRef = ref(db, 'eventos/' + id);
+            remove(eventoRef).then(() => {
+                alert("Evento removido com sucesso!");
+                listarEventos();
+            }).catch((error) => {
+                console.error("Erro ao remover evento:", error);
+                alert("Ocorreu um erro ao remover o evento.");
+            });
+        }
+
+        // Função para editar evento
+        function editarEvento(id, titulo, data, descricao) {
+            eventoEditando = id;
+            document.getElementById("titulo").value = titulo;
+            document.getElementById("data").value = data;
+            document.getElementById("descricao").value = descricao;
+            document.getElementById("form-title").textContent = "Editar Evento";
+            document.querySelector(".btn-cancelar").style.display = "inline";
+        }
+
+        // Função para cancelar edição
+        function cancelarEdicao() {
+            resetarFormulario();
+        }
+
+        // Função para resetar o formulário
+        function resetarFormulario() {
+            eventoEditando = null;
+            document.getElementById("form-adicionar-evento").reset();
+            document.getElementById("form-title").textContent = "Adicionar Novo Evento";
+            document.querySelector(".btn-cancelar").style.display = "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("form-adicionar-evento");
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+                const titulo = document.getElementById("titulo").value;
+                const data = document.getElementById("data").value;
+                const descricao = document.getElementById("descricao").value;
+                salvarEvento(titulo, data, descricao);
+            });
+            listarEventos();
+        });
+
+        window.removerEvento = removerEvento;
+        window.editarEvento = editarEvento;
+    </script>
+</body>
+</html>
